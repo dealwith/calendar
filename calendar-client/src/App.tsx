@@ -1,26 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Box, Button, Container, Heading } from '@radix-ui/themes'
+import './index.css'
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Box width='100%' height='100%'>
+      <Container size='4'>
+        <Heading align='center' size='9'>Google Calendar</Heading>
+        <Button mt='9' size='3'>Connect calendar</Button>
+      </Container>
+    </Box>
+  )
 }
 
-export default App;
+export default App
