@@ -7,10 +7,6 @@ import './index.css'
 function App() {
   const [events, setEvents] = useState<GoogleEvents>([]);
 
-  useEffect(() => {
-    fetchEvents()
-  }, []);
-
   const fetchEvents = () => {
     return axios.get('api/calendar/events', {withCredentials: true})
       .then(response => {
@@ -18,6 +14,10 @@ function App() {
       })
       .catch(error => console.error(error));
   };
+
+  useEffect(() => {
+    fetchEvents()
+  }, []);
 
   const connectCalendar = () => {
     window.location.href = '/api/auth/google';
