@@ -16,6 +16,7 @@ To run the project, follow these steps:
 
 1. Start the backend server: `cd backend && npm run dev`
 2. Start the frontend development server: `cd frontend && npm run dev`
+3. Ask for `.env` files from `https://github.com/dealwith`
 
 ## Contributing
 Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
