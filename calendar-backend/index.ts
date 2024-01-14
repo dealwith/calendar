@@ -1,66 +1,73 @@
-import express, { Request, Response, Application } from 'express';
-import dotenv from 'dotenv';
-import { google }  from 'googleapis';
-import cors from 'cors';
+import express, {Request, Response} from 'express';
+import { google } from 'googleapis';
+import cookieParser from 'cookie-parser';
 
-dotenv.config();
+require('dotenv').config();
+
+const app = express();
+const PORT = 8000;
+
+app.use(express.json());
+app.use(cookieParser());
 
 const oauth2Client = new google.auth.OAuth2(
-	process.env.CLIENT_ID,
-	process.env.CLIENT_SECRET,
-	process.env.REDIRECT_URI
+  process.env.CLIENT_ID,
+  process.env.CLIENT_SECRET,
+  process.env.REDIRECT_URI
 );
 
-const scopes = [
-	'https://www.googleapis.com/auth/calendar.events'
-]
+google.options({ auth: oauth2Client });
 
-const authorizationUrl = oauth2Client.generateAuthUrl({
-	access_type: 'offline',
-	scope: scopes,
-	include_granted_scopes: true
-});
-
-const app: Application = express();
-const port = process.env.PORT || 8000;
-
-app.use(cors())
-
-app.get('/', (req: Request, res: Response) => {
-	res.send('Welcome to Express & TypeScript Server');
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
 
 app.get('/api/auth/google', (req: Request, res: Response) => {
-	res.redirect(authorizationUrl);
-})
+	const url = oauth2Client.generateAuthUrl({
+		access_type: 'offline',
+		scope: ["https://www.googleapis.com/auth/calendar.events"]
+	});
 
-app.get('/api/auth/google/callback', (req: Request, res: Response) => {
+	res.redirect(url);
+});
+
+app.get('/api/auth/google/callback', async (req: Request , res: Response) => {
 	const { code } = req.query;
+	try {
+		const response = await oauth2Client.getToken(code as string);
+		const tokens = response.tokens;
 
-	console.log(code)
-	if (code) {
-		oauth2Client.getToken(code.toString(), (err, token) => {
-			if (err) {
-				console.log('Error while trying to retrieve access token', err);
-				return res.status(500).send('Error while trying to retrieve access token');
-			}
-
-			if (token) {
-				oauth2Client.setCredentials(token);
-				return res.status(200).send(token);
-			}
-		})
+		oauth2Client.setCredentials(tokens);
+		res.redirect(`http://localhost:5173`)
+	} catch (error) {
+		res.status(500).send('Authentication failed.');
 	}
-
-	return res.status(400).send('Bad Request');
-})
-
-app.get('api/calendar/events', async (req: Request, res: Response) => {
-
 });
 
-app.listen(port, () => {
-	console.log(`Server is Fire at http://localhost:${port}`);
+app.get('/calendar/events', async (req: Request, res: Response) => {
+  try {
+    const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
+    const response = await calendar.events.list({
+      calendarId: 'primary',
+      timeMin: (new Date()).toISOString(),
+      maxResults: 10,
+      singleEvents: true,
+      orderBy: 'startTime',
+    });
+
+    res.json(response.data.items);
+  } catch (error) {
+    res.status(500).send('Error retrieving calendar events.');
+  }
 });
 
-
+app.get('/api/exchange-code', async (req, res) => {
+  const { code } = req.query;
+  try {
+    const { tokens } = await oauth2Client.getToken(code as string);
+    oauth2Client.setCredentials(tokens);
+    res.redirect('http://localhost:5173?success=true&authorized_token=fdfdasfsa');
+  } catch (error) {
+    res.status(500).send('Error during code exchange.');
+  }
+});
