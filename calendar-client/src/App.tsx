@@ -2,9 +2,7 @@ import { Box, Button, Container, Heading } from '@radix-ui/themes'
 import axios from 'axios'
 import { useState, useEffect } from 'react';
 import { GoogleEvents } from './Event';
-
 import './index.css'
-
 
 function App() {
   const [events, setEvents] = useState<GoogleEvents>([]);
