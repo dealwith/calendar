@@ -41,3 +41,4 @@ next-env.d.ts
 .swc/
 .*.env
 .vscode
+serviceAccountKey.json
