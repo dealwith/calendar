@@ -1,8 +1,9 @@
 import { Box, Button, Container, Heading } from '@radix-ui/themes'
 import axios from 'axios'
-import './index.css'
 import { useState, useEffect } from 'react';
 import { GoogleEvents } from './Event';
+
+import './index.css'
 
 
 function App() {
