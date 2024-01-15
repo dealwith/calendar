@@ -12,7 +12,9 @@ admin.initializeApp({
   credential: admin.credential.cert({
 		projectId: process.env.SERVICE_ACCOUNT_PROJECT_ID,
 		clientEmail: process.env.SERVICE_ACCOUNT_CLIENT_EMAIL,
-		privateKey: process.env.SERVICE_ACCOUNT_PRIVATE_KEY!.replaceAll("\\n", "\n")
+		privateKey: process.env.SERVICE_ACCOUNT_PRIVATE_KEY!.includes('-----BEGIN')
+      ? process.env.SERVICE_ACCOUNT_PRIVATE_KEY
+      : process.env.SERVICE_ACCOUNT_PRIVATE_KEY!.replace(/\\n/g, '\n')
 	}),
 });
 
