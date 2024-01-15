@@ -8,8 +8,8 @@ To set up the project, follow these steps:
 
 1. Clone the repository: `git clone https://github.com/dealwith/calendar.git`
 2. Navigate to the project directory: `cd calendar`
-3. Install dependencies for the backend: `cd backend && npm install`
-4. Install dependencies for the frontend: `cd frontend && npm install`
+3. Install dependencies for the backend: `cd calendar-client && npm install`
+4. Install dependencies for the frontend: `cd calendar-backend && npm install`
 
 ## Usage
 To run the project, follow these steps:
