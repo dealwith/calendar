@@ -9,7 +9,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: process.env.VITE_API_PROXY_TARGET || 'http://localhost:8000',
+        target: "https://calendar-backend-dealwith-1f2d47cc339b.herokuapp.com/" || 'http://localhost:8000',
         changeOrigin: true,
       }
     }
