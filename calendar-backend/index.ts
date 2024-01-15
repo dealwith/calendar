@@ -9,7 +9,11 @@ require('dotenv').config();
 import admin from "firebase-admin";
 
 admin.initializeApp({
-  credential: admin.credential.cert("./serviceAccountKey.json")
+  credential: admin.credential.cert({
+		projectId: process.env.SERVICE_ACCOUNT_PROJECT_ID,
+		clientEmail: process.env.SERVICE_ACCOUNT_CLIENT_EMAIL,
+		privateKey: process.env.SERVICE_ACCOUNT_PRIVATE_KEY
+	}),
 });
 
 const app = express();
@@ -64,7 +68,7 @@ app.get('/api/auth/google/callback', async (req: Request , res: Response) => {
 		})
 
 		res.cookie('session_id', sessionId, { httpOnly: false, secure: true });
-		res.redirect(`http://localhost:5173`)
+		res.redirect(process.env.FRONTEND_URL as string)
 	} catch (error) {
 		res.status(500).send('Authentication failed.');
 	}
