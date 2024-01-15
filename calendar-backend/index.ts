@@ -3,12 +3,13 @@ import { google } from 'googleapis';
 import cookieParser from 'cookie-parser';
 import { randomUUID } from 'node:crypto'
 import cors from 'cors'
+import admin from "firebase-admin";
 
 require('dotenv').config();
 
-import admin from "firebase-admin";
 
 console.log("normal", process.env.SERVICE_ACCOUNT_PRIVATE_KEY)
+// console.log("----------------------------------------------------------------------------------------------------")
 console.log("----------------------------------------------------------------------------------------------------")
 console.log("replaced", process.env.SERVICE_ACCOUNT_PRIVATE_KEY!.replace(/\\n/g, '\n'))
 
