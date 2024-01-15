@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://calendar-backend-dealwith-1f2d47cc339b.herokuapp.com/:path*"
+    }
+  ]
+}

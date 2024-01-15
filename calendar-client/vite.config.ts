@@ -9,7 +9,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: "https://calendar-backend-dealwith-1f2d47cc339b.herokuapp.com/" || 'http://localhost:8000',
+        target: 'http://localhost:8000',
         changeOrigin: true,
       }
     }
