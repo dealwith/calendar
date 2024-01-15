@@ -17,11 +17,11 @@ export const EventDetailModal = ({ event, handleCloseModal }: EventDetailModalPr
 					{event && (
 						<>
 							<p>Date: {new Date(event.start.dateTime).toLocaleString()}</p>
-							<p>Location: {event.location}</p>
-							<p>Attendees: {parseAttendees(event.attendees)}</p>
-							<p>Organizer: {event?.organizer.email}</p>\
-							<p>Created at: {event.created}</p>
-							<p>Updated at: {event.updated}</p>
+							{event.location && <p>Location: {event.location}</p>}
+							{event.attendees && parseAttendees(event.attendees)}
+							<p>Organizer: {event?.organizer.email}</p>
+							<p>Created at: {new Date(event.created).toLocaleString()}</p>
+							<p>Updated at: {new Date(event.updated).toLocaleString()}</p>
 						</>
 					)}
         </Dialog.Description>

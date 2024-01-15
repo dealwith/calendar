@@ -6,7 +6,7 @@ export const parseAttendees = (attendees?: Attendee[]) => {
 
 	return (
 		<section>
-				<Strong>Attendees</Strong>
+				<Strong>Attendees:</Strong>
 		{attendees.map((attendee) => <div key={attendee.email}>{attendee.email}</div>)}
 	</section>
 	)
