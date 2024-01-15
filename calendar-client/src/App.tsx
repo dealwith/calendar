@@ -2,10 +2,11 @@ import { Box, Button, Container, Flex, Heading, Strong } from '@radix-ui/themes'
 import axios from 'axios'
 import { useState, useEffect } from 'react';
 import { GoogleEvent, GoogleEvents } from './interfaces/Event';
-
-import './index.css'
 import { parseAttendees } from './utils/parseAttendees';
 import { EventDetailModal } from './components/EventModal';
+
+import './index.css'
+
 
 function App() {
   const [events, setEvents] = useState<GoogleEvents>([]);
