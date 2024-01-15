@@ -2,13 +2,14 @@ import { Box, Button, Container, Flex, Heading } from '@radix-ui/themes'
 import axios from 'axios'
 import { useState, useEffect } from 'react';
 import { GoogleEvents } from './Event';
+
 import './index.css'
 
 function App() {
   const [events, setEvents] = useState<GoogleEvents>([]);
 
   const fetchEvents = () => {
-    return axios.get('/api/calendar/events', {withCredentials: true})
+    return axios.get(`/api/calendar/events`, {withCredentials: true})
       .then(response => {
         setEvents(response.data);
       })
@@ -20,11 +21,11 @@ function App() {
   }, []);
 
   const connectCalendar = () => {
-    window.location.href = '/api/auth/google';
+    window.location.href = `/api/auth/google`;
   };
 
   const disconnectCalendar = async () => {
-    const res = await axios.post('/api/calendar/disconnect')
+    const res = await axios.post(`/api/calendar/disconnect`)
     if (res.status === 200) {
       setEvents([]);
     }
