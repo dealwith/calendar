@@ -14,8 +14,8 @@ To set up the project, follow these steps:
 ## Usage
 To run the project, follow these steps:
 
-1. Start the backend server: `cd backend && npm run dev`
-2. Start the frontend development server: `cd frontend && npm run dev`
+1. Start the backend server: `cd calendar-backend && npm run dev`
+2. Start the frontend development server: `cd calendar-client && npm run dev`
 3. Ask for `.env` files for `calendar-backend` and `calendar-client` files from `https://github.com/dealwith` or via linkedin `https://www.linkedin.com/in/gleb-krishin/`
 
 ## Contributing
