@@ -7,12 +7,6 @@ import admin from "firebase-admin";
 
 require('dotenv').config();
 
-
-console.log("normal", process.env.SERVICE_ACCOUNT_PRIVATE_KEY)
-// console.log("----------------------------------------------------------------------------------------------------")
-console.log("----------------------------------------------------------------------------------------------------")
-console.log("replaced", process.env.SERVICE_ACCOUNT_PRIVATE_KEY!.replaceAll("\\n", '\n'))
-
 admin.initializeApp({
   credential: admin.credential.cert({
 		projectId: process.env.SERVICE_ACCOUNT_PROJECT_ID,

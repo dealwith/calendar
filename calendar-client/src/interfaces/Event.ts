@@ -20,6 +20,15 @@ export interface GoogleEvent {
   recurringEventId?: string
   originalStartTime?: OriginalStartTime
   visibility?: string
+  attendees?: Attendee[]
+  location?: string
+}
+
+export interface Attendee {
+  email: string
+  organizer: boolean
+  responseStatus: "accepted" | "needsAction" | "declined" | "tentative"
+  self: boolean
 }
 
 export interface Creator {
