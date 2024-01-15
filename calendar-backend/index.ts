@@ -1,7 +1,7 @@
 import express, {Request, Response} from 'express';
 import { google } from 'googleapis';
 import cookieParser from 'cookie-parser';
-import {randomUUID} from 'node:crypto'
+import { randomUUID } from 'node:crypto'
 import cors from 'cors'
 
 require('dotenv').config();
